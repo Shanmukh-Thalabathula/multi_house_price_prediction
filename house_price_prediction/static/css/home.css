@@ -1,13 +1,39 @@
+/* Home Page Styles */
+:root {
+    /* Existing Variables */
+    --accent-red: #e50914;
+    --hover-red: #c40812;
+    --container-bg: #181818;
+    --border-color: #2a2a2a;
+    --primary-text: #ffffff;
+    --secondary-text: #808080;
+    --input-bg: #2a2a2a;
+
+    /* New Variables for Stats Button */
+    --accent-blue: #0072b2;
+    --hover-blue: #005f8d;
+}
+
 .home-container {
     padding: 2rem;
     text-align: center;
+    background-color: #141414;
+    min-height: 100vh;
+}
+
+.home-container h2 {
+    color: var(--primary-text);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .home-city-selection {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    padding: 0 1rem;
 }
 
 .home-city-card {
@@ -26,41 +52,104 @@
 .home-city-card h3 {
     color: var(--primary-text);
     margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .home-city-card p {
     color: var(--secondary-text);
+    margin-bottom: 1.5rem;
 }
 
 .home-city-card-buttons {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
+    justify-content: center;
 }
 
-.home-action-button, .home-visualize-button {
+/* Unified Button Styles */
+.home-action-button,
+.home-visualize-button,
+.home-stats-button {
     flex: 1;
     padding: 0.8rem;
     border-radius: 4px;
     text-align: center;
     transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Predict Button */
 .home-action-button {
     background-color: var(--accent-red);
     color: white;
+    border: 1px solid var(--accent-red);
 }
 
+.home-action-button:hover {
+    background-color: var(--hover-red);
+    transform: translateY(-2px);
+}
+
+/* Visualize Button */
 .home-visualize-button {
     background-color: var(--container-bg);
     color: var(--primary-text);
     border: 1px solid var(--border-color);
 }
 
-.home-action-button:hover {
-    background-color: var(--hover-red);
-}
-
 .home-visualize-button:hover {
     background-color: var(--input-bg);
+    transform: translateY(-2px);
+}
+
+/* Stats Button */
+.home-stats-button {
+    background-color: var(--accent-blue);
+    color: white;
+    border: 1px solid var(--accent-blue);
+}
+
+.home-stats-button:hover {
+    background-color: var(--hover-blue);
+    transform: translateY(-2px);
+}
+
+/* Optional Icon Additions */
+.home-action-button::before {
+    content: "🔮 ";
+}
+
+.home-visualize-button::before {
+    content: "📈 ";
+}
+
+.home-stats-button::before {
+    content: "📊 ";
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-city-selection {
+        grid-template-columns: 1fr;
+    }
+
+    .home-city-card-buttons {
+        flex-direction: column;
+    }
+
+    .home-action-button,
+    .home-visualize-button,
+    .home-stats-button {
+        width: 100%;
+    }
+
+    .home-container h2 {
+        font-size: 2rem;
+    }
 }

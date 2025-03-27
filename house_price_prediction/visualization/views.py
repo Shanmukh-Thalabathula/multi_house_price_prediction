@@ -70,9 +70,18 @@ def area_prices(request, city):
 
         graphics = {k: base64.b64encode(v.getvalue()).decode('utf-8') for k, v in buffers.items()}
 
+        descriptions = {
+            'price_per_sqft': "Shows the most expensive areas by price per square foot. Higher values indicate premium locations.",
+            'property_type': "Displays the distribution of different property types in the market. Helps identify dominant property categories.",
+            'price_vs_size': "Illustrates the relationship between property size and price. The red line shows the general trend.",
+            'bedroom_prices': "Compares median prices based on bedroom count. Helps understand value progression with room numbers.",
+            'correlation': "Shows how different numeric features relate to each other. Strong correlations (close to +1/-1) indicate important relationships."
+        }
+
         return render(request, 'visualization/area_prices.html', {
             "graphics": graphics,
             "city": city.title(),
+            "descriptions": descriptions
         })
 
     except FileNotFoundError:

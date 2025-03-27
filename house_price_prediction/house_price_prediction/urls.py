@@ -7,4 +7,6 @@ urlpatterns = [
     path('predictor/', include('predictor.urls')),
     path('', include('users.urls')),
     path('visualization/', include('visualization.urls')),
+    path('descriptive_stats/', include('descriptive_statistics.urls')),
+    path('stats/', include('descriptive_statistics.urls')),
 ]
