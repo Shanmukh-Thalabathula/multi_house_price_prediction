@@ -1,0 +1,11 @@
+<!-- templates/predictor/error.html -->
+{% extends 'base.html' %}
+{% block title %}Prediction - Error {% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+    <h4>Error!</h4>
+    <p>{{ error }}</p>
+    <a href="/" class="btn btn-secondary">Try Again</a>
+</div>
+{% endblock %}

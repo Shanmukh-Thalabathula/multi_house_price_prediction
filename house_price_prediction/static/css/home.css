@@ -1,0 +1,66 @@
+.home-container {
+    padding: 2rem;
+    text-align: center;
+}
+
+.home-city-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.home-city-card {
+    background: var(--container-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-city-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.home-city-card h3 {
+    color: var(--primary-text);
+    margin-bottom: 1rem;
+}
+
+.home-city-card p {
+    color: var(--secondary-text);
+}
+
+.home-city-card-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.home-action-button, .home-visualize-button {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.home-action-button {
+    background-color: var(--accent-red);
+    color: white;
+}
+
+.home-visualize-button {
+    background-color: var(--container-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+}
+
+.home-action-button:hover {
+    background-color: var(--hover-red);
+}
+
+.home-visualize-button:hover {
+    background-color: var(--input-bg);
+}

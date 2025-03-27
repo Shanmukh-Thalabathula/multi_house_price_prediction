@@ -1,0 +1,124 @@
+    :root {
+        --netflix-red: #E50914;
+        --netflix-dark: #141414;
+        --netflix-gray: #303030;
+    }
+
+    body {
+        background-color: var(--netflix-dark);
+        color: white;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 95%;
+        position: relative;
+    }
+
+    .analysis-row {
+        display: flex;
+        overflow-x: auto;
+        padding: 20px;
+        gap: 25px;
+        scroll-behavior: smooth;
+        scrollbar-color: var(--netflix-red) var(--netflix-dark);
+        scrollbar-width: thin;
+        padding-bottom: 15px;
+    }
+
+    .analysis-row::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .analysis-row::-webkit-scrollbar-track {
+        background: var(--netflix-dark);
+        border-radius: 4px;
+    }
+
+    .analysis-row::-webkit-scrollbar-thumb {
+        background: var(--netflix-red);
+        border-radius: 4px;
+    }
+
+    .analysis-row::-webkit-scrollbar-thumb:hover {
+        background: #B20710;
+    }
+
+    .analysis-card {
+        flex: 0 0 280px;
+        height: 380px;
+        background: var(--netflix-gray);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        padding: 15px;
+    }
+
+    .analysis-card:hover {
+        transform: scale(1.05);
+        z-index: 2;
+    }
+
+    .card-header {
+        background-color: var(--netflix-red) !important;
+        border-bottom: none;
+        font-weight: bold;
+        font-size: 1.1rem;
+        padding: 12px 15px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-body img {
+        width: 100%;
+        height: 280px;
+        object-fit: contain;
+        background: white;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .scroll-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(20, 20, 20, 0.7);
+        color: white;
+        padding: 15px;
+        cursor: pointer;
+        z-index: 100;
+        border-radius: 50%;
+    }
+
+    .left-arrow { left: 20px; }
+    .right-arrow { right: 20px; }
+
+    .fullscreen-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .fullscreen-image {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    }

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="activities-container">
+    <h2>Recent Activities</h2>
+
+    {% if activities %}
+        <table class="activity-table">
+            <thead>
+                <tr>
+                    <th class="locality">Locality</th>
+                    <th class="size">Size</th>
+                    <th class="rooms">Beds</th>
+                    <th class="rooms">Baths</th>
+                    <th class="type">Type</th>
+                    <th class="age">Age</th>
+                    <th class="floor">Floor</th>
+                    <th class="furnished">Furnished</th>
+                    <th class="amenities">Amenities</th>
+                    <th class="distance">Metro</th>
+                    <th class="distance">Mall</th>
+                    <th class="distance">Hospital</th>
+                    <th class="distance">School</th>
+                    <th class="price">Price</th>
+                    <th class="date">Date</th>
+                    <th class="action">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for activity in activities %}
+                <tr>
+                    <td class="locality" data-label="Locality">{{ activity.locality }}</td>
+                    <td class="size" data-label="Size">{{ activity.size_sqft }} sqft</td>
+                    <td class="rooms" data-label="Beds">{{ activity.bedrooms }}</td>
+                    <td class="rooms" data-label="Baths">{{ activity.bathrooms }}</td>
+                    <td class="type" data-label="Type">{{ activity.property_type }}</td>
+                    <td class="age" data-label="Age">{{ activity.age }}y</td>
+                    <td class="floor" data-label="Floor">{{ activity.floor }}</td>
+                    <td class="furnished" data-label="Furnished">{% if activity.furnished %}Yes{% else %}No{% endif %}</td>
+                    <td class="amenities" data-label="Amenities">{{ activity.amenities|truncatechars:15 }}</td>
+                    <td class="distance" data-label="Metro">{{ activity.metro_distance }}km</td>
+                    <td class="distance" data-label="Mall">{{ activity.mall_distance }}km</td>
+                    <td class="distance" data-label="Hospital">{{ activity.hospital_distance }}km</td>
+                    <td class="distance" data-label="School">{{ activity.school_distance }}km</td>
+                    <td class="price" data-label="Price">₹{{ activity.predicted_price|floatformat:0 }}</td>
+                    <td class="date" data-label="Date">{{ activity.created_at|date:"M d, Y" }}</td>
+                    <td class="action" data-label="Action">
+                        <form method="post" action="{% url 'delete_activity' activity.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No recent activities found.</p>
+    {% endif %}
+</div>
+{% endblock %}

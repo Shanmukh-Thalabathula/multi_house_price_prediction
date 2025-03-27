@@ -1,0 +1,29 @@
+nav {
+    background-color: #000000;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+nav a {
+    color: var(--primary-text);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-red);
+}
+
+#project-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-right: auto;
+    color: var(--accent-red);
+}

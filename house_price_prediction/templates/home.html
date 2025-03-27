@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home-container">
+    <h2>Choose Your City</h2>
+    <div class="home-city-selection">
+        <div class="home-city-card home-hyderabad">
+            <h3>Hyderabad</h3>
+            <p>Predict property prices in Hyderabad.</p>
+            <div class="home-city-card-buttons">
+                <a href="{% url 'predict_price' city='hyderabad' %}" class="home-action-button">Predict</a>
+                <a href="{% url 'visualize' city='hyderabad' %}" class="home-visualize-button">Visualize</a>
+            </div>
+        </div>
+        <div class="home-city-card home-delhi">
+            <h3>Delhi</h3>
+            <p>Predict property prices in Delhi.</p>
+            <div class="home-city-card-buttons">
+                <a href="{% url 'predict_price' city='delhi' %}" class="home-action-button">Predict</a>
+                <a href="{% url 'visualize' city='delhi' %}" class="home-visualize-button">Visualize</a>
+            </div>
+        </div>
+        <div class="home-city-card home-mumbai">
+            <h3>Mumbai</h3>
+            <p>Predict property prices in Mumbai.</p>
+            <div class="home-city-card-buttons">
+                <a href="{% url 'predict_price' city='mumbai' %}" class="home-action-button">Predict</a>
+                <a href="{% url 'visualize' city='mumbai' %}" class="home-visualize-button">Visualize</a>
+            </div>
+        </div>
+        <div class="home-city-card home-kolkata">
+            <h3>Kolkata</h3>
+            <p>Predict property prices in Kolkata.</p>
+            <div class="home-city-card-buttons">
+                <a href="{% url 'predict_price' city='kolkata' %}" class="home-action-button">Predict</a>
+                <a href="{% url 'visualize' city='kolkata' %}" class="home-visualize-button">Visualize</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

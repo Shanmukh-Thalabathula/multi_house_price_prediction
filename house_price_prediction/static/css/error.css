@@ -1,0 +1,29 @@
+.alert {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #3A1D1D;
+    border-radius: 8px;
+    color: #FF6B6B;
+    text-align: center;
+    border: 1px solid #5E2A2A;
+}
+
+.alert h4 {
+    color: #FF4D4D;
+    margin-bottom: 1rem;
+}
+
+.alert a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-red);
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.alert a:hover {
+    background-color: var(--hover-red);
+}

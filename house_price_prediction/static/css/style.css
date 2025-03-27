@@ -1,0 +1,51 @@
+/* Dark Theme Variables */
+:root {
+    --dark-bg: #181818;
+    --darker-bg: #141414;
+    --container-bg: #2D2D2D;
+    --primary-text: #FFFFFF;
+    --secondary-text: #B3B3B3;
+    --accent-red: #E50914;
+    --hover-red: #B20710;
+    --input-bg: #404040;
+    --border-color: #4D4D4D;
+}
+
+/* Reset and Base Styles */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--primary-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.base-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 80px; /* Space for fixed nav */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+}
+
+a {
+    color: var(--primary-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-red);
+}

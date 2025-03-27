@@ -1,0 +1,20 @@
+@media (max-width: 768px) {
+    .home-city-selection {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .activity-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    nav {
+        padding: 1rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+}

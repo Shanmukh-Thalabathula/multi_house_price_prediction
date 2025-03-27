@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="project-description">
+    <h2>Multi-City Property Price Prediction System</h2>
+    <p>This Real Estate Valuation Platform is a full-stack machine learning application designed to estimate property values across major Indian cities including Hyderabad, Delhi, Mumbai, and Kolkata. The system analyzes critical property features including size, location, amenities, and accessibility metrics to generate accurate price predictions. Built with Python's scikit-learn and Django, it serves as a comprehensive solution for homeowners, investors, and real estate professionals across multiple cities.</p>
+
+    <h3>Technical Architecture</h3>
+    <p>Our multi-city architecture features:
+        <ul>
+            <li>City-specific machine learning models trained on localized datasets</li>
+            <li>Unified preprocessing pipeline handling regional variations</li>
+            <li>Dynamic feature engineering for each city's unique characteristics</li>
+            <li>Hybrid model architecture combining general trends with city-specific adjustments</li>
+        </ul>
+    </p>
+
+    <h3>Supported Cities</h3>
+    <div class="city-grid">
+        <div class="city-card">
+            <h4>Hyderabad</h4>
+            <ul>
+                <li>Price Range: ₹20L - ₹5Cr</li>
+                <li>Special Features: IT corridor weighting</li>
+                <li>Unique Amenities: Fiber internet readiness</li>
+            </ul>
+        </div>
+        <div class="city-card">
+            <h4>Delhi</h4>
+            <ul>
+                <li>Price Range: ₹30L - ₹8Cr</li>
+                <li>Special Features: Pollution impact factors</li>
+                <li>Unique Amenities: Central heating systems</li>
+            </ul>
+        </div>
+        <div class="city-card">
+            <h4>Mumbai</h4>
+            <ul>
+                <li>Price Range: ₹50L - ₹15Cr</li>
+                <li>Special Features: Floor-space index (FSI) calculations</li>
+                <li>Unique Amenities: Sea view premium</li>
+            </ul>
+        </div>
+        <div class="city-card">
+            <h4>Kolkata</h4>
+            <ul>
+                <li>Price Range: ₹15L - ₹4Cr</li>
+                <li>Special Features: Heritage location markers</li>
+                <li>Unique Amenities: Puja room considerations</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Key Features</h3>
+    <ul>
+        <li><strong>Multi-City Support:</strong> Predict prices across 4 major Indian cities</li>
+        <li><strong>City-Specific Models:</strong> Individual trained models for each city</li>
+        <li><strong>Regional Adaptations:</strong>
+            <ul>
+                <li>Hyderabad: IT corridor proximity scoring</li>
+                <li>Delhi: Metro connectivity weighting</li>
+                <li>Mumbai: Floor-space index calculations</li>
+                <li>Kolkata: Heritage location adjustments</li>
+            </ul>
+        </li>
+        <li><strong>Cross-City Comparisons:</strong> Compare property metrics between cities</li>
+    </ul>
+
+    <h3>System Capabilities</h3>
+    <ul>
+        <li>Dynamic locality suggestions for all supported cities</li>
+        <li>City-specific price adjustment factors</li>
+        <li>Regional measurement unit support (sqft/acre/gaj)</li>
+        <li>Custom validation rules for each city's building norms</li>
+        <li>Market trend comparisons between cities</li>
+    </ul>
+
+    <h3>Dataset & Modeling</h3>
+    <p>Each city model uses:
+        <ul>
+            <li>10,000+ synthetic property records per city</li>
+            <li>City-specific feature engineering:
+                <ul>
+                    <li>Hyderabad: Tech hub proximity</li>
+                    <li>Delhi: Air quality impact</li>
+                    <li>Mumbai: Coastal proximity</li>
+                    <li>Kolkata: Cultural heritage factors</li>
+                </ul>
+            </li>
+            <li>Local price range variations</li>
+            <li>Regional amenity importance weighting</li>
+        </ul>
+    </p>
+
+    <h3>Future Enhancements</h3>
+    <ul>
+        <li>Add 6 more cities by 2025</li>
+        <li>City cluster comparisons (e.g., Hyderabad vs Bangalore)</li>
+        <li>Investment potential scores across cities</li>
+        <li>Inter-city relocation cost estimations</li>
+    </ul>
+
+    <!-- Maintain developer details section -->
+    <h3>Developer Details</h3>
+    <ul>
+        <li><strong>Name:</strong> Thalabathula Shanmukh</li>
+        <li><strong>Instagram:</strong> <a href="https://www.instagram.com/mr_shannu_._/?__pwa=1" target="_blank">@mr_shannu_._</a></li>
+        <li><strong>YouTube:</strong> <a href="https://www.youtube.com/@Code-Breaker-n5x" target="_blank">Code-Breaker</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shanmukh-thalabathula-034b66310/" target="_blank">Shanmukh Thalabathula</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/Shanmukh-Thalabathula" target="_blank">Shanmukh-Thalabathula</a></li>
+        <li><strong>Phone:</strong> 6304846130</li>
+    </ul>
+
+    <blockquote>
+        <em>“Empowering pan-India property decisions through data-driven insights across major cities.”</em>
+    </blockquote>
+</div>
+{% endblock %}

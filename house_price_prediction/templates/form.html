@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-card">
+        <h2> {{ city }} Property Price Predictor</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Locality Input with Datalist -->
+            <div class="form-group">
+                <label>Locality:</label>
+                <input type="text"
+                       name="area"
+                       id="localityInput"
+                       list="localityList"
+                       autocomplete="off"
+                       class="form-control"
+                       placeholder="Start typing or select from list"
+                       value="{{ form_data.Area|default:'' }}"
+                       required>
+                <datalist id="localityList">
+                    {% for area in localities %}
+                    <option value="{{ area }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+
+            <!-- Property Details -->
+            <div class="form-group">
+                <label>Property Size (sqft):</label>
+                <input type="number" name="size_sqft"
+                       min="100" max="10000" step="100"
+                       value="{{ form_data.Size_sqft|default:'' }}"
+                       required class="form-control">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bedrooms:</label>
+                    <input type="number" name="bedrooms"
+                           min="1" max="10"
+                           value="{{ form_data.Bedrooms|default:'' }}"
+                           required class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Bathrooms:</label>
+                    <input type="number" name="bathrooms"
+                           min="1" max="10"
+                           value="{{ form_data.Bathrooms|default:'' }}"
+                           required class="form-control">
+                </div>
+            </div>
+
+            <!-- Distance Fields -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Metro Distance (km):</label>
+                    <input type="number" name="metro_distance"
+                           min="0.1" max="20.0" step="0.1"
+                           value="{{ form_data.Metro_Distance|default:'' }}"
+                           required class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Mall Distance (km):</label>
+                    <input type="number" name="mall_distance"
+                           min="0.1" max="20.0" step="0.1"
+                           value="{{ form_data.Mall_Distance|default:'' }}"
+                           required class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Hospital Distance (km):</label>
+                    <input type="number" name="hospital_distance"
+                           min="0.1" max="20.0" step="0.1"
+                           value="{{ form_data.Hospital_Distance|default:'' }}"
+                           required class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>School Distance (km):</label>
+                    <input type="number" name="school_distance"
+                           min="0.1" max="20.0" step="0.1"
+                           value="{{ form_data.School_Distance|default:'' }}"
+                           required class="form-control">
+                </div>
+            </div>
+
+            <!-- Additional Features -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Property Type:</label>
+                    <select name="property_type" class="form-control" required>
+                        <option value="Apartment" {% if form_data.Property_Type == 'Apartment' %}selected{% endif %}>Apartment</option>
+                        <option value="Villa" {% if form_data.Property_Type == 'Villa' %}selected{% endif %}>Villa</option>
+                        <option value="Independent House" {% if form_data.Property_Type == 'Independent House' %}selected{% endif %}>Independent House</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Property Age (years):</label>
+                    <input type="number" name="age"
+                           min="0" max="100"
+                           value="{{ form_data.Age|default:'' }}"
+                           required class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Floor Number:</label>
+                    <input type="number" name="floor"
+                           min="0"
+                           value="{{ form_data.Floor|default:'' }}"
+                           required class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Furnished:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="furnished" value="1"
+                            {% if form_data.Furnished == 1 %}checked{% endif %} required> Yes</label>
+                        <label><input type="radio" name="furnished" value="0"
+                            {% if form_data.Furnished == 0 %}checked{% endif %}> No</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amenities Input -->
+            <div class="form-group">
+                <label>Amenities:</label>
+                <div class="checkbox-group">
+                    {% for amenity in amenities_list %}
+                    <label>
+                        <input type="checkbox" name="amenities" value="{{ amenity }}"
+                            {% if amenity in form_data.Amenities %}checked{% endif %}>
+                        {{ amenity }}
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Estimate Price</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('localityInput').addEventListener('input', function() {
+    const options = document.getElementById('localityList').options;
+    const inputValue = this.value.toLowerCase();
+
+    Array.from(options).forEach(option => {
+        option.hidden = !option.value.toLowerCase().startsWith(inputValue);
+    });
+});
+
+document.getElementById('localityInput').addEventListener('focus', function() {
+    this.placeholder = "Select or type locality";
+    this.click();
+});
+
+document.getElementById('localityInput').addEventListener('blur', function() {
+    this.placeholder = "Start typing or select from list";
+});
+</script>
+{% endblock %}

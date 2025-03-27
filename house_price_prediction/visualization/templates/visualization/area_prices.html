@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ city }} Real Estate Analysis{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4" style="color: var(--netflix-red);">{{ city }} Housing Analysis</h1>
+
+    <div class="scroll-arrow left-arrow">❮</div>
+    <div class="scroll-arrow right-arrow">❯</div>
+
+    <div class="analysis-row">
+        <!-- Price per Sqft -->
+        <div class="analysis-card">
+            <div class="card-header">🏘️ Price per Sqft</div>
+            <div class="card-body">
+                <img src="data:image/png;base64,{{ graphics.price_per_sqft }}" alt="Price per square foot">
+            </div>
+        </div>
+
+        <!-- Property Type Distribution -->
+        <div class="analysis-card">
+            <div class="card-header">🏡 Property Types</div>
+            <div class="card-body">
+                <img src="data:image/png;base64,{{ graphics.property_type }}" alt="Property types">
+            </div>
+        </div>
+
+        <!-- Price vs Size -->
+        <div class="analysis-card">
+            <div class="card-header">📈 Price vs Size</div>
+            <div class="card-body">
+                <img src="data:image/png;base64,{{ graphics.price_vs_size }}" alt="Price vs size">
+            </div>
+        </div>
+
+        <!-- Bedroom Analysis -->
+        <div class="analysis-card">
+            <div class="card-header">🛏️ Bedroom Prices</div>
+            <div class="card-body">
+                <img src="data:image/png;base64,{{ graphics.bedroom_prices }}" alt="Bedroom prices">
+            </div>
+        </div>
+
+        <!-- Correlation Heatmap -->
+        <div class="analysis-card">
+            <div class="card-header">🔗 Correlations</div>
+            <div class="card-body">
+                <img src="data:image/png;base64,{{ graphics.correlation }}" alt="Correlations">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fullscreen Overlay -->
+<div class="fullscreen-overlay">
+    <span class="close-btn">&times;</span>
+    <img class="fullscreen-image" src="" alt="Fullscreen view">
+</div>
+
+<script>
+    // Horizontal scroll functionality
+    const row = document.querySelector('.analysis-row');
+    const cardWidth = 280 + 25;
+
+    document.querySelector('.right-arrow').addEventListener('click', () => {
+        row.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+
+    document.querySelector('.left-arrow').addEventListener('click', () => {
+        row.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+
+    // Fullscreen functionality
+    document.querySelectorAll('.analysis-card img').forEach(img => {
+        img.addEventListener('click', () => {
+            const overlay = document.querySelector('.fullscreen-overlay');
+            const fullscreenImg = overlay.querySelector('.fullscreen-image');
+            fullscreenImg.src = img.src;
+            overlay.style.display = 'flex';
+        });
+    });
+
+    // Close overlay
+    document.querySelector('.close-btn').addEventListener('click', () => {
+        document.querySelector('.fullscreen-overlay').style.display = 'none';
+    });
+
+    document.querySelector('.fullscreen-overlay').addEventListener('click', (e) => {
+        if (e.target === document.querySelector('.fullscreen-overlay')) {
+            document.querySelector('.fullscreen-overlay').style.display = 'none';
+        }
+    });
+
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="result-container">
+    <h3 class="result-heading">Property Details</h3>
+
+    <div class="result-details-grid">
+        <div class="result-detail">
+            <span class="result-detail-title">Locality:</span>
+            <span class="result-detail-value">{{ input_data.Area }}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Size:</span>
+            <span class="result-detail-value">{{ input_data.Size_sqft }} sqft</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Bedrooms:</span>
+            <span class="result-detail-value">{{ input_data.Bedrooms }}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Bathrooms:</span>
+            <span class="result-detail-value">{{ input_data.Bathrooms }}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Property Type:</span>
+            <span class="result-detail-value">{{ input_data.Property_Type }}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Age:</span>
+            <span class="result-detail-value">{{ input_data.Age }} years</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Floor:</span>
+            <span class="result-detail-value">{{ input_data.Floor }}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Furnished:</span>
+            <span class="result-detail-value">{% if input_data.Furnished %}Yes{% else %}No{% endif %}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Amenities:</span>
+            <span class="result-detail-value">{{ input_data.Amenities|join:", " }}</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Metro Distance:</span>
+            <span class="result-detail-value">{{ input_data.Metro_Distance }} km</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Mall Distance:</span>
+            <span class="result-detail-value">{{ input_data.Mall_Distance }} km</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">Hospital Distance:</span>
+            <span class="result-detail-value">{{ input_data.Hospital_Distance }} km</span>
+        </div>
+        <div class="result-detail">
+            <span class="result-detail-title">School Distance:</span>
+            <span class="result-detail-value">{{ input_data.School_Distance }} km</span>
+        </div>
+    </div>
+
+    <div class="result-price-section">
+        <h3 class="result-heading">Estimated Market Value</h3>
+        <div class="result-price">{{ prediction }}</div>
+    </div>
+</div>
+{% endblock %}
