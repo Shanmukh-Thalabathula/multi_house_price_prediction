@@ -9,4 +9,5 @@ urlpatterns = [
     path('visualization/', include('visualization.urls')),
     path('descriptive_stats/', include('descriptive_statistics.urls')),
     path('stats/', include('descriptive_statistics.urls')),
+    path('data-explorer/', include('query_app.urls')),
 ]

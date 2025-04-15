@@ -1,10 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
 
 {% block title %}{{ city }} Real Estate Analysis{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <h1 class="mb-4" style="color: var(--netflix-red);">{{ city }} Housing Analysis</h1>
+
+    <!-- Area Selection -->
+    <div class="analysis-filter-card">
+        <div class="card-body">
+            <form method="get">
+                <select name="area" class="analysis-select" onchange="this.form.submit()">
+                    {% for area in areas %}
+                        <option value="{{ area }}" {% if area == selected_area %}selected{% endif %}>
+                            {{ area|title }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
 
     <div class="scroll-arrow left-arrow">❮</div>
     <div class="scroll-arrow right-arrow">❯</div>
@@ -106,6 +123,5 @@
             document.querySelector('.fullscreen-overlay').style.display = 'none';
         }
     });
-
 </script>
 {% endblock %}

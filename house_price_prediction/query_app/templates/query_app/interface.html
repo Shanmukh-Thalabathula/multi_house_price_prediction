@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="query-container">
+    <h1 class="query-title">SQL Query Interface</h1>
+
+    <form method="post" class="query-form">
+        {% csrf_token %}
+        <div class="query-form-group">
+            {{ form.city }}
+        </div>
+        <div class="query-form-group">
+            {{ form.query }}
+        </div>
+        <button type="submit" class="query-submit">Execute SQL</button>
+    </form>
+
+    {% if error %}
+        <div class="query-error">Error: {{ error }}</div>
+    {% endif %}
+
+    {% if results %}
+    <div class="query-results">
+        <h2 class="query-results-title">Results ({{ results|length }} rows)</h2>
+        <div class="query-table-container">
+            <table class="query-table">
+                <thead>
+                    <tr>
+                        {% for column in columns %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
