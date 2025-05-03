@@ -23,9 +23,6 @@
         </div>
     </div>
 
-    <div class="scroll-arrow left-arrow">❮</div>
-    <div class="scroll-arrow right-arrow">❯</div>
-
     <div class="analysis-row">
         <!-- Price per Sqft -->
         <div class="analysis-card">
@@ -48,80 +45,45 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Price vs Size -->
-        <div class="analysis-card">
-            <div class="card-header">📈 Price vs Size</div>
-            <div class="card-body">
-                <img src="data:image/png;base64,{{ graphics.price_vs_size }}" alt="Price vs size">
-                <div class="graph-description">
-                    {{ descriptions.price_vs_size }}
-                </div>
-            </div>
-        </div>
-
-        <!-- Bedroom Analysis -->
-        <div class="analysis-card">
-            <div class="card-header">🛏️ Bedroom Prices</div>
-            <div class="card-body">
-                <img src="data:image/png;base64,{{ graphics.bedroom_prices }}" alt="Bedroom prices">
-                <div class="graph-description">
-                    {{ descriptions.bedroom_prices }}
-                </div>
-            </div>
-        </div>
-
-        <!-- Correlation Heatmap -->
-        <div class="analysis-card">
-            <div class="card-header">🔗 Correlations</div>
-            <div class="card-body">
-                <img src="data:image/png;base64,{{ graphics.correlation }}" alt="Correlations">
-                <div class="graph-description">
-                    {{ descriptions.correlation }}
-                </div>
-            </div>
+    <!-- Fullscreen Overlay -->
+    <div class="fullscreen-overlay">
+        <div class="fullscreen-image-container">
+            <span class="close-btn">&times;</span>
+            <img class="fullscreen-image" src="" alt="Fullscreen view">
         </div>
     </div>
 </div>
 
-<!-- Fullscreen Overlay -->
-<div class="fullscreen-overlay">
-    <span class="close-btn">&times;</span>
-    <img class="fullscreen-image" src="" alt="Fullscreen view">
-</div>
-
 <script>
-    // Horizontal scroll functionality
-    const row = document.querySelector('.analysis-row');
-    const cardWidth = 280 + 25;
-
-    document.querySelector('.right-arrow').addEventListener('click', () => {
-        row.scrollBy({ left: cardWidth, behavior: 'smooth' });
-    });
-
-    document.querySelector('.left-arrow').addEventListener('click', () => {
-        row.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-    });
-
     // Fullscreen functionality
     document.querySelectorAll('.analysis-card img').forEach(img => {
-        img.addEventListener('click', () => {
+        img.addEventListener('click', (e) => {
             const overlay = document.querySelector('.fullscreen-overlay');
             const fullscreenImg = overlay.querySelector('.fullscreen-image');
-            fullscreenImg.src = img.src;
+            fullscreenImg.src = e.target.src;
             overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
     });
 
-    // Close overlay
-    document.querySelector('.close-btn').addEventListener('click', () => {
-        document.querySelector('.fullscreen-overlay').style.display = 'none';
-    });
-
+    // Close functionality
+    document.querySelector('.close-btn').addEventListener('click', closeFullscreen);
     document.querySelector('.fullscreen-overlay').addEventListener('click', (e) => {
         if (e.target === document.querySelector('.fullscreen-overlay')) {
-            document.querySelector('.fullscreen-overlay').style.display = 'none';
+            closeFullscreen();
         }
     });
+
+    // ESC key close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeFullscreen();
+    });
+
+    function closeFullscreen() {
+        document.querySelector('.fullscreen-overlay').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 </script>
 {% endblock %}

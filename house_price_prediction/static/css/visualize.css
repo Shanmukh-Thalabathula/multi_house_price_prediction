@@ -12,24 +12,18 @@ body {
 }
 
 .container {
-    max-width: 95%;
-    position: relative;
-    padding: 0 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Area Filter Styles */
 .analysis-filter-card {
     background: var(--netflix-dark-gray);
     border-radius: 8px;
-    margin: 2rem 0;
+    margin: 2rem auto;
     border: 1px solid #2a2a2a;
-    transition: transform 0.3s ease;
     max-width: 400px;
-}
-
-.analysis-filter-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .analysis-select {
@@ -47,97 +41,58 @@ body {
     background-size: 12px auto;
 }
 
-.analysis-select:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
-}
-
 .analysis-row {
     display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 20px;
-    gap: 25px;
     scroll-behavior: smooth;
-    scrollbar-color: var(--netflix-red) var(--netflix-dark);
-    scrollbar-width: thin;
-    padding-bottom: 15px;
-}
-
-.analysis-row::-webkit-scrollbar {
-    height: 8px;
-}
-
-.analysis-row::-webkit-scrollbar-track {
-    background: var(--netflix-dark);
-    border-radius: 4px;
-}
-
-.analysis-row::-webkit-scrollbar-thumb {
-    background: var(--netflix-red);
-    border-radius: 4px;
-}
-
-.analysis-row::-webkit-scrollbar-thumb:hover {
-    background: #B20710;
+    gap: 30px;
+    padding: 20px 0;
+    -webkit-overflow-scrolling: touch;
 }
 
 .analysis-card {
-    flex: 0 0 280px;
-    height: 380px;
+    flex: 0 0 auto;
+    width: 400px;
     background: var(--netflix-gray);
     border-radius: 8px;
-    transition: transform 0.3s ease;
-    cursor: pointer;
     padding: 15px;
-    position: relative;
-    overflow: visible !important;
-}
-
-.analysis-card:hover {
-    transform: scale(1.05);
-    z-index: 1000;
+    scroll-snap-align: start;
+    min-height: 400px;
 }
 
 .card-header {
-    background-color: var(--netflix-red) !important;
-    border-bottom: none;
-    font-weight: bold;
-    font-size: 1.1rem;
+    background-color: var(--netflix-red);
     padding: 12px 15px;
-    border-radius: 6px 6px 0 0;
-}
-
-.card-body {
-    padding: 15px;
-    height: 100%;
-    overflow: visible !important;
-    position: relative;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
 .card-body img {
     width: 100%;
-    height: 280px;
+    height: 300px;
     object-fit: contain;
-    background: white;
+    background: var(--netflix-dark-gray);
     border-radius: 4px;
-    padding: 5px;
+    padding: 10px;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
 }
 
-.scroll-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(20, 20, 20, 0.7);
+.card-body img:hover {
+    transform: scale(1.03);
+}
+
+.graph-description {
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 15px;
-    cursor: pointer;
-    z-index: 100;
-    border-radius: 50%;
-    font-size: 1.2rem;
+    font-size: 0.95em;
+    line-height: 1.5;
+    border-radius: 0 0 8px 8px;
+    margin-top: 15px;
 }
-
-.left-arrow { left: 20px; }
-.right-arrow { right: 20px; }
 
 .fullscreen-overlay {
     position: fixed;
@@ -145,47 +100,74 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    cursor: pointer;
+}
+
+.fullscreen-image-container {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    padding: 20px;
+    background: var(--netflix-dark-gray);
+    border-radius: 8px;
+    cursor: default;
 }
 
 .fullscreen-image {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 100%;
+    max-height: 80vh;
     object-fit: contain;
 }
 
 .close-btn {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: -15px;
+    right: -15px;
     color: white;
-    font-size: 40px;
+    font-size: 30px;
     cursor: pointer;
+    background: var(--netflix-red);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: transform 0.3s ease;
 }
 
-.graph-description {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 15px;
-    transform: translateY(100%);
-    transition: all 0.3s ease;
-    z-index: 100;
-    font-size: 0.9em;
-    pointer-events: none;
-    border-radius: 0 0 8px 8px;
-    opacity: 0;
+.close-btn:hover {
+    transform: scale(1.1);
 }
 
-/* Fixed hover effect */
-.analysis-card:hover .graph-description {
-    transform: translateY(0);
-    opacity: 1;
+/* Scrollbar Styling */
+.analysis-row::-webkit-scrollbar {
+    height: 8px;
+}
+
+.analysis-row::-webkit-scrollbar-track {
+    background: var(--netflix-dark-gray);
+}
+
+.analysis-row::-webkit-scrollbar-thumb {
+    background: var(--netflix-red);
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .analysis-card {
+        width: 300px;
+        min-height: 350px;
+    }
+
+    .card-body img {
+        height: 250px;
+    }
 }

@@ -44,45 +44,6 @@
         </div>
     </div>
 
-    <!-- Full Numerical Statistics -->
-    <div class="stats-card">
-        <div class="stats-card-body">
-            <h3 class="stats-card-title">Detailed Property Statistics</h3>
-            <div class="stats-table-container">
-                <table class="stats-data-table">
-                    <thead class="stats-table-header">
-                        <tr>
-                            <th>Statistic</th>
-                            {% for col in numerical_columns %}
-                            <th>{{ col }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for stat in statistics_order %}
-                        <tr>
-                            <td class="stats-table-label">{{ stat }}</td>
-                            {% for col in numerical_columns %}
-                            <td>
-                                {% with value=numerical_stats|get_item:stat|get_item:col %}
-                                    {% if value is None %}
-                                        N/A
-                                    {% elif stat == 'Count' %}
-                                        {{ value|floatformat:0 }}
-                                    {% else %}
-                                        {{ value|floatformat:2 }}
-                                    {% endif %}
-                                {% endwith %}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <!-- Categorical Statistics -->
     <div class="stats-card">
         <div class="stats-card-body">
