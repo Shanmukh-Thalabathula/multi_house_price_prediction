@@ -3,36 +3,53 @@
     max-width: 1200px;
     margin: 2rem auto;
     padding: 1rem;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #141414;
+    color: #e5e5e5;
 }
 
 .stats-main-header {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
+    color: #ffffff;
+    border-bottom: 2px solid #E50914;
     padding-bottom: 0.5rem;
     margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .stats-card {
     margin: 2rem 0;
     padding: 1.5rem;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    background: #1F1F1F;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
 }
 
 .stats-select {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #3498db;
+    border: 2px solid #E50914;
     border-radius: 4px;
     font-size: 1rem;
-    background: #f8f9fa;
+    background: #2D2D2D;
+    color: #ffffff;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20...");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E50914'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    background-size: 12px auto;
+    background-size: 16px auto;
+    transition: all 0.3s ease;
+}
+
+.stats-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
 }
 
 .stats-grid {
@@ -42,22 +59,28 @@
 }
 
 .stats-data-box {
-    background: #f8f9fa;
+    background: #2D2D2D;
     padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #3498db;
+    border-radius: 4px;
+    border-left: 4px solid #E50914;
+    transition: transform 0.2s ease;
+}
+
+.stats-data-box:hover {
+    transform: scale(1.02);
 }
 
 .stats-data-label {
     font-weight: 600;
-    color: #7f8c8d;
+    color: #808080;
     margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .stats-data-value {
-    font-size: 1.1rem;
-    color: #2c3e50;
-    font-weight: 500;
+    font-size: 1.25rem;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .stats-category-grid {
@@ -67,10 +90,16 @@
 }
 
 .stats-category-card {
-    background: #f8f9fa;
+    background: #1F1F1F;
     padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid #ecf0f1;
+    border-radius: 4px;
+    border: 1px solid #404040;
+    transition: all 0.3s ease;
+}
+
+.stats-category-card:hover {
+    border-color: #E50914;
+    box-shadow: 0 4px 25px rgba(229, 9, 20, 0.2);
 }
 
 .stats-category-info {
@@ -79,12 +108,14 @@
 
 .stats-info-label {
     font-weight: 600;
-    color: #7f8c8d;
+    color: #808080;
+    font-size: 0.9rem;
 }
 
 .stats-info-value {
-    color: #2c3e50;
+    color: #ffffff;
     margin-top: 0.25rem;
+    font-size: 1.1rem;
 }
 
 .stats-value-list {
@@ -97,8 +128,13 @@
 .stats-list-item {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
-    border-bottom: 1px dotted #ecf0f1;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #404040;
+    transition: background-color 0.2s ease;
+}
+
+.stats-list-item:hover {
+    background-color: rgba(229, 9, 20, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -113,18 +149,28 @@
     .stats-category-grid {
         grid-template-columns: 1fr;
     }
+
+    .stats-main-header {
+        font-size: 1.75rem;
+    }
 }
 
 @media (max-width: 480px) {
     .stats-container {
         padding: 0.5rem;
+        margin: 1rem auto;
     }
 
     .stats-card {
         padding: 1rem;
+        margin: 1.5rem 0;
     }
 
     .stats-main-header {
         font-size: 1.5rem;
+    }
+
+    .stats-data-value {
+        font-size: 1.1rem;
     }
 }
