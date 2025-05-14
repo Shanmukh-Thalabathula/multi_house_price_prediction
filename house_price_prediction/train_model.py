@@ -1,61 +1,114 @@
+import os
+import django
 import pandas as pd
+import joblib
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-import joblib
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# Load data
-data = pd.read_csv('data/hyderabad_house_prices.csv')
+# Django setup to access models
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'house_price_prediction.settings')
+django.setup()
 
-# Drop the 'Amenities' column (text data requiring special handling)
-data = data.drop('Amenities', axis=1)
+from Model_Evaluation.models import EvaluationMetrics
 
-# Define features and target
-X = data.drop('Price', axis=1)
-y = data['Price']
+# Configuration
+CITIES = ['hyderabad', 'delhi', 'mumbai', 'kolkata']  # Add all your cities
 
-# Identify column types
-numerical_cols = [
-    'Size_sqft', 'Bedrooms', 'Bathrooms', 'Age',
-    'Floor', 'Furnished', 'Metro_Distance',
-    'Mall_Distance', 'Hospital_Distance', 'School_Distance'
-]
-categorical_cols = ['Area', 'Property_Type']  # Categorical features
 
-# Create preprocessing pipeline
-numerical_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='median')),
-    ('scaler', StandardScaler())
-])
+def train_and_evaluate_models():
+    for city in CITIES:
+        print(f"\n{'=' * 40}")
+        print(f"Processing {city.capitalize()} dataset")
+        print(f"{'=' * 40}")
 
-categorical_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='most_frequent')),
-    ('encoder', OneHotEncoder(handle_unknown='ignore'))
-])
+        try:
+            # Load data
+            data = pd.read_csv(f'data/{city}_house_prices.csv')
 
-preprocessor = ColumnTransformer(transformers=[
-    ('num', numerical_transformer, numerical_cols),
-    ('cat', categorical_transformer, categorical_cols)
-])
+            # Data preprocessing
+            data = data.drop('Amenities', axis=1)
+            X = data.drop('Price', axis=1)
+            y = data['Price']
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+            # Define column types
+            numerical_cols = [
+                'Size_sqft', 'Bedrooms', 'Bathrooms', 'Age',
+                'Floor', 'Furnished', 'Metro_Distance',
+                'Mall_Distance', 'Hospital_Distance', 'School_Distance'
+            ]
+            categorical_cols = ['Area', 'Property_Type']
 
-# Preprocess data
-X_train_preprocessed = preprocessor.fit_transform(X_train)
-X_test_preprocessed = preprocessor.transform(X_test)
+            # Create preprocessing pipeline
+            numerical_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy='median')),
+                ('scaler', StandardScaler())
+            ])
 
-# Train model
-model = RandomForestRegressor(n_estimators=200, random_state=42, max_depth=10)
-model.fit(X_train_preprocessed, y_train)
+            categorical_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy='most_frequent')),
+                ('encoder', OneHotEncoder(handle_unknown='ignore'))
+            ])
 
-# Save artifacts
-joblib.dump(model, 'hyderabad_house_price_model.pkl')
-joblib.dump(preprocessor, 'hyderabad_preprocessor.pkl')
+            preprocessor = ColumnTransformer(transformers=[
+                ('num', numerical_transformer, numerical_cols),
+                ('cat', categorical_transformer, categorical_cols)
+            ])
 
-print("Model training complete! Saved:")
-print("- hyderabad_house_price_model.pkl (trained model)")
-print("- hyderabad_preprocessor.pkl (data preprocessing pipeline)")
+            # Split data
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=0.2, random_state=42
+            )
+
+            # Preprocess data
+            X_train_preprocessed = preprocessor.fit_transform(X_train)
+            X_test_preprocessed = preprocessor.transform(X_test)
+
+            # Train model
+            model = RandomForestRegressor(
+                n_estimators=200,
+                random_state=42,
+                max_depth=10
+            )
+            model.fit(X_train_preprocessed, y_train)
+
+            # Save artifacts
+            joblib.dump(model, f'{city}_house_price_model.pkl')
+            joblib.dump(preprocessor, f'{city}_preprocessor.pkl')
+
+            # Generate predictions
+            y_pred = model.predict(X_test_preprocessed)
+
+            # Calculate metrics
+            metrics = {
+                'mse': mean_squared_error(y_test, y_pred),
+                'rmse': mean_squared_error(y_test, y_pred) ** 0.5,
+                'mae': mean_absolute_error(y_test, y_pred),
+                'r2': r2_score(y_test, y_pred)
+            }
+
+            # Save to database
+            EvaluationMetrics.objects.update_or_create(
+                city=city,
+                defaults=metrics
+            )
+
+            print(f"\n{city.capitalize()} metrics:")
+            print(f"MSE: {metrics['mse']:.2f}")
+            print(f"RMSE: {metrics['rmse']:.2f}")
+            print(f"MAE: {metrics['mae']:.2f}")
+            print(f"R²: {metrics['r2']:.2f}")
+            print(f"Saved {city} model and metrics!")
+
+        except Exception as e:
+            print(f"\nError processing {city}: {str(e)}")
+            continue
+
+
+if __name__ == "__main__":
+    train_and_evaluate_models()
+    print("\nTraining complete for all cities!")

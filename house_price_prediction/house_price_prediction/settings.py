@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'visualization',
     'descriptive_statistics',
     'query_app',
+    'Model_Evaluation',
 ]
 
 MIDDLEWARE = [
